@@ -16,5 +16,5 @@ Tabelas gold:
 - Criei uma outra tabela com informações de quantidade de revisões e data da ultima revisão de uma acomodação. A chave dessa tabela também é ID_ACOMODACAO.
 - Crie uma view contendo informações de quais acomodações estão livres, data da última scrape, quantidade de acomodações,quantidade de reviews avaliações e o link da acomodação que está livre seguindo a última atualização do dado.
 - Uma outra view, bem similar a anterior porém retornando acomodações que estão livres e o host é um superhost.
-
+(Deixei as duas criadas como views devido a que sempre ela for executada, pegar o valor mais recente do status)
 ![image](https://github.com/CarlosCaastro/ADA-05/assets/110546779/9bf7fde8-c2f9-4b68-bcf2-f11ca949cbf8)
