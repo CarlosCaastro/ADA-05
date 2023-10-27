@@ -1,0 +1,26 @@
+{{
+    config(
+        materialized="table"
+    )
+}}
+
+WITH rank_preco AS (
+    SELECT
+        ID_ACOMODACAO,
+        DATA,
+        PRECO,
+        PRECO_AJUSTADO,
+        MINIMO_NOITES,
+        MAXIMO_NOITES,
+        DISPONIVEL,
+        ROW_NUMBER() OVER (PARTITION BY ID_ACOMODACAO ORDER BY DATA DESC) AS ranking
+    FROM silver_preco_geral_airbnb
+)
+SELECT
+    ID_ACOMODACAO,
+    AVG(PRECO) AS PRECO_MEDIO,
+    AVG(PRECO_AJUSTADO) AS PRECO_AJUSTADO_MEDIO,
+    MAX(CASE WHEN ranking = 1 THEN PRECO ELSE NULL END) AS PRECO_MAIS_RECENTE,
+    MAX(DATA) AS ULTIMA_DATA
+FROM rank_preco
+GROUP BY ID_ACOMODACAO
